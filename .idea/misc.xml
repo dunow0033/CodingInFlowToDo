@@ -10,6 +10,9 @@
         <entry key="..\:/Users/bedon/AndroidStudioProjects/CodingInFlowToDo/app/src/main/res/drawable/ic_search.xml" value="0.1" />
         <entry key="..\:/Users/bedon/AndroidStudioProjects/CodingInFlowToDo/app/src/main/res/drawable/ic_sort.xml" value="0.1" />
         <entry key="..\:/Users/bedon/AndroidStudioProjects/CodingInFlowToDo/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/bedon/AndroidStudioProjects/CodingInFlowToDo/app/src/main/res/layout/fragment_add_edit_task.xml" value="0.1671875" />
+        <entry key="..\:/Users/bedon/AndroidStudioProjects/CodingInFlowToDo/app/src/main/res/layout/fragment_tasks.xml" value="0.1671875" />
+        <entry key="..\:/Users/bedon/AndroidStudioProjects/CodingInFlowToDo/app/src/main/res/layout/item_task.xml" value="0.1671875" />
       </map>
     </option>
   </component>
