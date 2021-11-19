@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.codinginflowtodo.R
 import com.example.codinginflowtodo.data.SortOrder
+import com.example.codinginflowtodo.data.Task
 import com.example.codinginflowtodo.databinding.FragmentTasksBinding
 import com.example.codinginflowtodo.util.onQueryTextChanged
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,7 +17,14 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class TasksFragment : Fragment(R.layout.fragment_tasks) {
+class TasksFragment : Fragment(R.layout.fragment_tasks), TasksAdapter.OnItemClickListener {
+    override fun onItemClick(task: Task) {
+        viewModel.onTaskSelected(task)
+    }
+
+    override fun onCheckBoxClick(task: Task, isChecked: Boolean) {
+        viewModel.onTaskCheckedChanged(task, isChecked)
+    }
 
     private val viewModel: TasksViewModel by viewModels()
 
@@ -25,7 +33,7 @@ class TasksFragment : Fragment(R.layout.fragment_tasks) {
 
         val binding = FragmentTasksBinding.bind(view)
 
-        val taskAdapter = TasksAdapter()
+        val taskAdapter = TasksAdapter(this)
 
         binding.apply {
             recyclerViewTasks.apply {
