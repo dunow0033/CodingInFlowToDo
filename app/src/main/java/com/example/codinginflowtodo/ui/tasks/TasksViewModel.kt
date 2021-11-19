@@ -3,6 +3,7 @@ package com.example.codinginflowtodo.ui.tasks
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
+import com.example.codinginflowtodo.data.SortOrder
 import com.example.codinginflowtodo.data.TaskDao
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
@@ -30,5 +31,3 @@ class TasksViewModel @ViewModelInject constructor(
 
     val tasks = tasksFlow.asLiveData()
 }
-
-enum class SortOrder { BY_NAME, BY_DATE }
