@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.tasks.TasksFragment"
-    android:background="@android:color/holo_blue_dark">
+    tools:context=".ui.tasks.TasksFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_tasks"
