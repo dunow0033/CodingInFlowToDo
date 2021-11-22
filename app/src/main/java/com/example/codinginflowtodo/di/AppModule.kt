@@ -23,9 +23,9 @@ object AppModule {
         app: Application,
         callback: TaskDatabase.Callback
     ) = Room.databaseBuilder(app, TaskDatabase::class.java, "task_database")
-            .fallbackToDestructiveMigration()
-            .addCallback(callback)
-            .build()
+        .fallbackToDestructiveMigration()
+        .addCallback(callback)
+        .build()
 
     @Provides
     fun provideTaskDao(db: TaskDatabase) = db.taskDao()

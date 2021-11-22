@@ -2,6 +2,7 @@ package com.example.codinginflowtodo.data
 
 import android.content.Context
 import android.util.Log
+import androidx.datastore.createDataStore
 import androidx.datastore.preferences.createDataStore
 import androidx.datastore.preferences.edit
 import androidx.datastore.preferences.emptyPreferences
@@ -20,14 +21,14 @@ enum class SortOrder { BY_NAME, BY_DATE }
 data class FilterPreferences(val sortOrder: SortOrder, val hideCompleted: Boolean)
 
 @Singleton
-class PreferencesManager @Inject constructor(@ApplicationContext context: Context){
+class PreferencesManager @Inject constructor(@ApplicationContext context: Context) {
 
     private val dataStore = context.createDataStore("user_preferences")
 
     val preferencesFlow = dataStore.data
         .catch { exception ->
-            if(exception is IOException) {
-                Log.e(TAG, "Error reading preferences")
+            if (exception is IOException) {
+                Log.e(TAG, "Error reading preferences", exception)
                 emit(emptyPreferences())
             } else {
                 throw exception
