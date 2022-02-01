@@ -2,11 +2,11 @@ package com.example.codinginflowtodo.data
 
 import android.content.Context
 import android.util.Log
-import androidx.datastore.createDataStore
-import androidx.datastore.preferences.createDataStore
-import androidx.datastore.preferences.edit
-import androidx.datastore.preferences.emptyPreferences
-import androidx.datastore.preferences.preferencesKey
+import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.emptyPreferences
+import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.preferencesDataStore
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
@@ -20,10 +20,13 @@ enum class SortOrder { BY_NAME, BY_DATE }
 
 data class FilterPreferences(val sortOrder: SortOrder, val hideCompleted: Boolean)
 
+val Context.dataStore by preferencesDataStore("user_preferences")
+
 @Singleton
 class PreferencesManager @Inject constructor(@ApplicationContext context: Context) {
 
-    private val dataStore = context.createDataStore("user_preferences")
+    //private val dataStore = context.createDataStore("user_preferences")
+    val dataStore = context.dataStore
 
     val preferencesFlow = dataStore.data
         .catch { exception ->
@@ -55,7 +58,7 @@ class PreferencesManager @Inject constructor(@ApplicationContext context: Contex
     }
 
     private object PreferencesKeys {
-        val SORT_ORDER = preferencesKey<String>("sort_order")
-        val HIDE_COMPLETED = preferencesKey<Boolean>("hide_completed")
+        val SORT_ORDER = stringPreferencesKey("sort_order")
+        val HIDE_COMPLETED = booleanPreferencesKey("hide_completed")
     }
 }

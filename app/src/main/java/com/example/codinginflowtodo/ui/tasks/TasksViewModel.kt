@@ -1,7 +1,7 @@
 package com.example.codinginflowtodo.ui.tasks
 
-import androidx.hilt.Assisted
-import androidx.hilt.lifecycle.ViewModelInject
+//import androidx.hilt.Assisted
+//import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.example.codinginflowtodo.data.PreferencesManager
 import com.example.codinginflowtodo.data.SortOrder
@@ -10,17 +10,20 @@ import com.example.codinginflowtodo.data.TaskDao
 import com.example.codinginflowtodo.ui.ADD_TASK_RESULT_OK
 import com.example.codinginflowtodo.ui.EDIT_TASK_RESULT_OK
 import com.example.codinginflowtodo.ui.addedittask.AddEditTaskViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class TasksViewModel @ViewModelInject constructor(
+@HiltViewModel
+class TasksViewModel @Inject constructor(
     private val taskDao: TaskDao,
     private val preferencesManager: PreferencesManager,
-    @Assisted private val state: SavedStateHandle
+    private val state: SavedStateHandle
 ) : ViewModel() {
 
     val searchQuery = state.getLiveData("searchQuery", "")
@@ -81,10 +84,15 @@ class TasksViewModel @ViewModelInject constructor(
         tasksEventChannel.send(TasksEvent.ShowTaskSavedConfirmationMessage(text))
     }
 
+    fun onDeleteAllCompletedClick() = viewModelScope.launch {
+        tasksEventChannel.send(TasksEvent.NavigateToDeleteAllCompletedScreen)
+    }
+
     sealed class TasksEvent {
         object NavigateToAddTaskScreen : TasksEvent()
         data class NavigateToEditTaskScreen(val task: Task) : TasksEvent()
         data class ShowUndoDeleteTaskMessage(val task: Task) : TasksEvent()
         data class ShowTaskSavedConfirmationMessage(val msg: String) : TasksEvent()
+        object NavigateToDeleteAllCompletedScreen: TasksEvent()
     }
 }
