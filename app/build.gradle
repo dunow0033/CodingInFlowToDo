@@ -8,13 +8,13 @@ plugins {
 }
 
 android {
-    compileSdkVersion rootProject.compileSdkVersion
-    buildToolsVersion "29.0.3"
+    compileSdkVersion 33
+    buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.codinginflow.mvvmtodo"
-        minSdkVersion rootProject.minSdkVersion
-        targetSdkVersion rootProject.targetSdkVersion
+        minSdkVersion 23
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
 
@@ -43,6 +43,7 @@ android {
     }
 }
 
+
 dependencies {
     // Default dependencies
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
@@ -60,7 +61,7 @@ dependencies {
     // Lifecycle + ViewModel & LiveData
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
-    implementation "android.arch.lifecycle:common-java8:$lifecycleVersion"
+    implementation "android.arch.lifecycle:common-java8:1.1.1"
 
     // Navigation Component
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
@@ -78,8 +79,8 @@ dependencies {
     // Dagger Hilt
     implementation "com.google.dagger:hilt-android:$hiltVersion"
     kapt "com.google.dagger:hilt-android-compiler:$hiltVersion"
-    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hiltAndroidXVersion"
-    kapt "androidx.hilt:hilt-compiler:$hiltAndroidXVersion"
+/*    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hiltAndroidXVersion"
+    kapt "androidx.hilt:hilt-compiler:$hiltAndroidXVersion"*/
 
     // DataStore
     implementation "androidx.datastore:datastore-preferences:$dataStoreVersion"
